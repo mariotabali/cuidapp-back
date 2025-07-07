@@ -1,0 +1,1 @@
+["^ ","~$check-user-credentials",["^ ","~:row",7,"~:col",1,"~:fixed-arities",["~#set",[2]],"~:name","^0","~:ns","~$dango-stack.login.db","~:top-ns","^7","~:arities",["^ ","~i2",["^ ","~:ret",["^4",["~:nil","~:boolean"]],"~:arglist-str","[email submitted-password]"]],"~:type","~:fn"],"~:filename","/home/mario/workpace/cuidapp-back/src/dango_stack/login/db.clj"]

@@ -2,7 +2,8 @@
   (:require [compojure.core :refer [GET POST defroutes]]
             [compojure.route :as route]
             [dango-stack.util :refer [json-response]] 
-            [dango-stack.login.orchestrator :refer [login-orchestrator]]
+            [dango-stack.login.orchestrator :refer [login-orchestrator]] 
+            [dango-stack.pp-under-care.orchestrator :refer [pp-under-care-orchestrator]]
             ))
 
 (defroutes app-routes
@@ -16,6 +17,8 @@
                {:description "Receives email and password, validates that email is valid, selects email from user table and compares hashes if true return 200 and the JWT_TOKEN"})
       (json-response(login-orchestrator email-password)))
     )
-
+   (GET "/api/pp-under-care" req
+     (json-response (pp-under-care-orchestrator req)))
+  
   (route/not-found
    (json-response {:error "404 not found"})))

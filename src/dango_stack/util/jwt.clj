@@ -4,3 +4,6 @@
 
 (defn generate-jwt-token [email]
   (jwt/sign {:email email} (jwt-secret)))
+
+(defn decode-jwt [token]
+  (jwt/unsign token (jwt-secret)))
