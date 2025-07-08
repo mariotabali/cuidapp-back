@@ -11,4 +11,4 @@
 
 (defn get-pp-under-care [username]
   (jdbc/query db-spec
-              ["SELECT name, age FROM cared_people WHERE user_id = (SELECT id FROM users WHERE email = ?)" username]))
+              ["SELECT name, age FROM v_cared_people WHERE user_id = (SELECT id FROM users WHERE email = ?)" username]))

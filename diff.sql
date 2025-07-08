@@ -1,0 +1,2 @@
+--DELETE FROM cared_people where id =2;
+--ALTER TABLE cared_people ADD CONSTRAINT unique_name UNIQUE (name);
