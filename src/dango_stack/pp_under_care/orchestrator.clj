@@ -6,5 +6,4 @@
 (defn pp-under-care-orchestrator [req]
   (let [jwt-token (get-in req [:headers "authorization"])
         username (:email (decode-jwt jwt-token))]
-    (println username)
     (get-pp-under-care username)))
