@@ -10,6 +10,6 @@
               :password (env :db-password)})
 
 (defn get-pp-under-care [username]
-  (println username)
+  (println (:user username))
   (jdbc/query db-spec
               ["SELECT name, age FROM v_cared_people WHERE carer_email = ?" username]))
