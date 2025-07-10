@@ -5,6 +5,8 @@
             [dango-stack.login.orchestrator :refer [login-orchestrator]] 
             [dango-stack.pp-under-care.orchestrator :refer [pp-under-care-orchestrator]]
             [dango-stack.pp-under-care.create.orchestrator :refer [create-pp-under-care-orchestrator]]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [dango-stack.middleware.auth :refer [wrap-authentication]]
             ))
 
 (defroutes app-routes
@@ -24,6 +26,11 @@
      (let [body (:body req)] 
        (json-response (create-pp-under-care-orchestrator body)))
        )
-  
   (route/not-found
    (json-response {:error "404 not found"})))
+
+(def app
+  (-> app-routes
+      wrap-authentication
+      (wrap-json-body {:keywords? true})
+      wrap-json-response)) 

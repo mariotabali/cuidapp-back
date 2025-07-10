@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL
 );
 
-TRUNCATE TABLE users;
+
 
 -- Insert a user into the table
 INSERT INTO users (email, password) 
