@@ -16,7 +16,7 @@
           (if-let [user-info (decode-jwt jwt-token)]
             (do
               (log/info "Authenticated request by user:" (:email user-info))
-              (handler (assoc req :user user-info)))
+              (handler (assoc req :user (:email user-info))))
             {:status 401
              :headers {"Content-Type" "application/json"}
              :body {:error "Unauthorized"}}))))))
