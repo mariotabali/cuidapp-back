@@ -10,7 +10,7 @@
       (if (contains? public-paths uri)
         (handler req)
         (let [jwt-token (get-in req [:headers "authorization"])]
-          (println jwt-token)
+          (println (decode-jwt jwt-token))
           (if-let [user-info (decode-jwt jwt-token)]
             (do
               (log/info "Authenticated request by user:" (:email user-info))
