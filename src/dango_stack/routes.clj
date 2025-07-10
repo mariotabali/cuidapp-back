@@ -31,6 +31,6 @@
 
 (def app
   (-> app-routes
-      wrap-authentication
-      (wrap-json-body {:keywords? true})
-      wrap-json-response)) 
+      (wrap-json-body {:keywords? true})  ;; parses :body
+      wrap-json-response                  ;; formats responses
+      wrap-authentication))              ;; now it has access to :headers and :body
