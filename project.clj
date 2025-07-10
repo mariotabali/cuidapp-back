@@ -13,7 +13,7 @@
                  [org.clojure/tools.logging "1.3.0"] 
                  [org.clojure/java.jdbc "0.4.2"]
                  [environ "1.2.0"] 
-                 [buddy/buddy-sign "1.1.0"]
+                 [buddy/buddy-sign "3.4.333"]
                  [bcrypt-clj "0.3.3"]]
   
   :plugins [[lein-dotenv "RELEASE"]]
