@@ -1,3 +1,7 @@
+(ns dango-stack.middleware.auth
+  (:require [dango-stack.util.jwt :refer [decode-jwt]]
+            [clojure.tools.logging :as log]))
+
 (def public-paths #{"﻿/api/login" "/api/register"})
 
 (defn wrap-authentication [handler]

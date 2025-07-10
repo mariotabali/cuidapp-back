@@ -9,7 +9,8 @@
                  [ring/ring-jetty-adapter "1.12.1"] 
                  [ring/ring-json "0.5.1"]
                  [org.postgresql/postgresql "42.2.25"]
-                 [cheshire "5.11.0"] ;; JSON encoding/decoding
+                 [cheshire "5.11.0"] 
+                 [org.clojure/tools.logging "1.3.0"] 
                  [org.clojure/java.jdbc "0.4.2"]
                  [environ "1.2.0"] 
                  [buddy/buddy-sign "1.1.0"]
