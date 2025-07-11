@@ -12,7 +12,8 @@
                  [cheshire "5.11.0"] 
                  [org.clojure/tools.logging "1.3.0"] 
                  [org.clojure/java.jdbc "0.4.2"]
-                 [environ "1.2.0"] 
+                 [environ "1.2.0"]
+                 [com.draines/postal "2.0.4"]
                  [buddy/buddy-sign "3.4.333"]
                  [bcrypt-clj "0.3.3"]]
   

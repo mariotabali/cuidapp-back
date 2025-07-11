@@ -9,7 +9,6 @@ CREATE TABLE cared_people (
   carer_id INTEGER NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-  -- Foreign key constraint to ensure carer_id refers to a valid user
   CONSTRAINT fk_carer
     FOREIGN KEY (carer_id)
     REFERENCES users(id)

@@ -5,6 +5,7 @@
             [dango-stack.login.orchestrator :refer [login-orchestrator]] 
             [dango-stack.pp-under-care.orchestrator :refer [pp-under-care-orchestrator]]
             [dango-stack.pp-under-care.create.orchestrator :refer [create-pp-under-care-orchestrator]]
+            [dango-stack.register.orchestrator :refer [register-orchestrator]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [dango-stack.middleware.auth :refer [wrap-authentication]]
             ))
@@ -19,13 +20,15 @@
                                 :JWT_TOKEN "asdasdasdasd"}}
                {:description "Receives email and password, validates that email is valid, selects email from user table and compares hashes if true return 200 and the JWT_TOKEN"})
       (json-response(login-orchestrator email-password)))
-    ) 
+    )
+  (POST "/api/register" req
+    (let [user-details (:body req)]
+      (json-response (register-orchestrator user-details))))
   (GET "/api/pp-under-care" req
      (json-response (pp-under-care-orchestrator req))) 
   (POST "/api/pp-under-care" req 
      (let [body (:body req)] 
-       (json-response (create-pp-under-care-orchestrator body)))
-       )
+       (json-response (create-pp-under-care-orchestrator body))))
   (route/not-found
    (json-response {:error "404 not found"})))
 
