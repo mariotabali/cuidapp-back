@@ -1,3 +1,8 @@
+(ns dango-stack.register.email
+  (:require
+   [postal.core :refer [send-message]]
+   [environ.core :refer [env]]))
+
 (defn send-activation-email [email token]
   (let [smtp-config {:host     (env :smtp-host)
                      :user     (env :smtp-user)
@@ -8,14 +13,9 @@
         subject "Activate your account"
         body (str "Welcome!\n\nPlease activate your account by visiting the following link:\n\n"
                   "https://yourdomain.com/activate?token=" token)]
-    (try
-      (let [result (send-message smtp-config
-                                 {:from    from
-                                  :to      email
-                                  :subject subject
-                                  :body    body})]
-        (println "Email send result:" result)
-        result)
-      (catch Exception e
-        (println "Failed to send activation email:" (.getMessage e))
-        {:error (.getMessage e)}))))
+    (send-message smtp-config
+                  {:from    from
+                   :to      email
+                   :subject subject
+                   :body    body}))
+  )
