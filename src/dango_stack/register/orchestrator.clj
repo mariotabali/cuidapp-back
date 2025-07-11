@@ -10,6 +10,9 @@
   (let [{:keys [name email password]} user-details
         token (generate-jwt-token email)
         password-hash (crypt-password password)]
-    (send-activation-email email token)
+    (try 
+      (send-activation-email email token)
+      (catch Exception e 
+        (println (.getMessage e))))
     (save-activation-details email name password-hash token)
     {:status 201}))
