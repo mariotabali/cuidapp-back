@@ -1,7 +1,7 @@
 (ns dango-stack.register.orchestrator
   (:require
    [dango-stack.util.jwt :refer [generate-jwt-token]]
-   [dango-stack.register.email :refer [send-activation-email]]
+   [dango-stack.register.email :refer [send-activation-email send-activation-email-mailersend]] ;;fix this
    [dango-stack.register.db :refer [save-activation-details]]
    [bcrypt-clj.auth :refer [crypt-password]])
   )
@@ -11,7 +11,7 @@
         token (generate-jwt-token email)
         password-hash (crypt-password password)]
     (try 
-      (send-activation-email email token)
+      (send-activation-email-mailersend email token)
       (catch Exception e 
         (println (.getMessage e))))
     (save-activation-details email name password-hash token)
