@@ -4,7 +4,8 @@
                  "clojars" {:url "https://repo.clojars.org/"}}
   :dependencies [
                  [org.clojure/clojure "1.11.1"]
-                 [compojure "1.7.0"] 
+                 [compojure "1.7.0"]
+                 [clj-http "3.12.3"]   ;;delete
                  [ring/ring-core "1.12.1"]
                  [ring/ring-jetty-adapter "1.12.1"] 
                  [ring/ring-json "0.5.1"]
