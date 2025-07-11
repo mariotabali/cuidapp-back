@@ -1,13 +1,14 @@
 (ns dango-stack.routes
   (:require [compojure.core :refer [GET POST defroutes]]
             [compojure.route :as route]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [dango-stack.middleware.auth :refer [wrap-authentication]]
+
             [dango-stack.util :refer [json-response]] 
             [dango-stack.login.orchestrator :refer [login-orchestrator]] 
             [dango-stack.pp-under-care.orchestrator :refer [pp-under-care-orchestrator]]
             [dango-stack.pp-under-care.create.orchestrator :refer [create-pp-under-care-orchestrator]]
             [dango-stack.register.orchestrator :refer [register-orchestrator]]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-            [dango-stack.middleware.auth :refer [wrap-authentication]]
             ))
 
 (defroutes app-routes
@@ -18,7 +19,7 @@
                {:output "an object having a status and a jwt token if successful"}
                {:sample_output {:status 200
                                 :JWT_TOKEN "asdasdasdasd"}}
-               {:description "Receives email and password, validates that email is valid, selects email from user table and compares hashes if true return 200 and the JWT_TOKEN"})
+               {:behaviour "Receives email and password, validates that email is valid, selects email from user table and compares hashes if true return 200 and the JWT_TOKEN"})
       (json-response(login-orchestrator email-password)))
     )
   (POST "/api/register" req
