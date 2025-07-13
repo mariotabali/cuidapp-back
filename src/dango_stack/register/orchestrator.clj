@@ -11,7 +11,7 @@
         token (generate-jwt-token email)
         password-hash (crypt-password password)]
     (try 
-      (send-activation-email-mailersend email token)
+      (send-activation-email email token)
       (catch Exception e 
         (println (.getMessage e))))
     (save-activation-details email name password-hash token)
