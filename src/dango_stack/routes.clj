@@ -1,14 +1,16 @@
 (ns dango-stack.routes
   (:require [compojure.core :refer [GET POST defroutes]]
             [compojure.route :as route]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-response]] 
+            [ring.middleware.params :refer [wrap-params]]
+            
             [dango-stack.middleware.auth :refer [wrap-authentication]]
-
             [dango-stack.util :refer [json-response]] 
             [dango-stack.login.orchestrator :refer [login-orchestrator]] 
             [dango-stack.pp-under-care.orchestrator :refer [pp-under-care-orchestrator]]
             [dango-stack.pp-under-care.create.orchestrator :refer [create-pp-under-care-orchestrator]]
             [dango-stack.register.orchestrator :refer [register-orchestrator]]
+            [dango-stack.activate-account.orchestrator :refer [activate-account-orchestrator]]
             ))
 
 (defroutes app-routes
@@ -24,9 +26,12 @@
     )
   (POST "/api/register" req
     (let [user-details (:body req)]
-      (json-response (register-orchestrator user-details))))
+      (json-response (register-orchestrator user-details)))) 
+  (GET "/api/activate" req
+     (let [token (get-in req [:query-params :token])]
+       (json-response (activate-account-orchestrator token))))
   (GET "/api/pp-under-care" req
-     (json-response (pp-under-care-orchestrator req))) 
+     (json-response (pp-under-care-orchestrator req)))
   (POST "/api/pp-under-care" req 
      (let [body (:body req)] 
        (json-response (create-pp-under-care-orchestrator body))))
@@ -37,4 +42,5 @@
   (-> app-routes
       (wrap-json-body {:keywords? true})  ;; parses :body
       wrap-json-response                  ;; formats responses
-      wrap-authentication))              ;; now it has access to :headers and :body
+      wrap-authentication
+      wrap-params))              ;; now it has access to :headers and :body

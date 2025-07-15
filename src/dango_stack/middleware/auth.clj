@@ -3,7 +3,7 @@
             [clojure.tools.logging :as log]
             [clojure.string :as str]))
 
-(def public-paths #{"/api/login" "/api/register"})
+(def public-paths #{"/api/login" "/api/register" "/api/activate"})
 
 (defn wrap-authentication [handler]
   (fn [req]

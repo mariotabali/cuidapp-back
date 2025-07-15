@@ -1,0 +1,2 @@
+curl -X GET "http://localhost:3000/api/activate?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im10YWJhbGlAcWFub3ZhLmNsIiwianRpIjoiYjg1ZDQzYjEtNWI0MS00YjA0LThlODUtNzAwMDNkNmY0YWZmIiwiaWF0IjoxNzUyNTA3NDUyfQ.CdJDo-TRaCKdtP1YMcuRrzQBsIKBw2r8RrKdyX53kLM"
+
