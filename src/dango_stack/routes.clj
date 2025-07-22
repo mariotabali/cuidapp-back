@@ -28,9 +28,8 @@
     (let [user-details (:body req)]
       (json-response (register-orchestrator user-details)))) 
   (GET "/api/activate" req
-    (println (str req))
-     (let [token (get-in req [:query-params :token])]
-       (json-response (activate-account-orchestrator token))))
+     (let [params (:params req)]
+       (json-response (activate-account-orchestrator params))))
   (GET "/api/pp-under-care" req
      (json-response (pp-under-care-orchestrator req)))
   (POST "/api/pp-under-care" req 

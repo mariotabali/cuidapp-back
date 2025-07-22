@@ -4,9 +4,9 @@
    [dango-stack.activate-account.db :refer [activate-user]])
   )
  
-  (defn activate-account-orchestrator [token]
-    (println (some? token))
-    (let [{:keys [email]} (decode-jwt token)]
+  (defn activate-account-orchestrator [token-object]
+    (let [ token (get token-object "token")
+          {:keys [email]} (decode-jwt token)]
       (if (activate-user email token)
         {:status 200 :message "Account activated successfully."}
         {:status 400 :message "Activation failed. "})))

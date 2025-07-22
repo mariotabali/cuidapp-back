@@ -9,6 +9,7 @@
         user-query "SELECT password FROM users WHERE email = ?"
         user (first (jdbc/query db-config [user-query email]))]
     (when user
+      (println (str user))
       (when (check-password submitted-password (:password user))
         true)
       )))
