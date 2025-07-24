@@ -12,6 +12,6 @@
         (if user-authenticated
           (success-response 200 {
                                  :JWT_TOKEN (generate-jwt-token email)
-                                 :id (:id user_authenticated)})
+                                 :id (:id user-authenticated)})
           (unauthorized-response)))
       {:status 400 :errors validation-errors})))
