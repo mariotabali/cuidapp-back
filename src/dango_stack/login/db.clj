@@ -6,10 +6,11 @@
 
 (defn check-user-credentials [email submitted-password]
   (let [db-config (get-db-config)
-        user-query "SELECT password FROM users WHERE email = ?"
+        user-query "SELECT id, password FROM users WHERE email = ?"
         user (first (jdbc/query db-config [user-query email]))]
     (when user
       (println (str user))
       (when (check-password submitted-password (:password user))
-        true)
+        {:authenticated true
+         :id (:id user)})
       )))

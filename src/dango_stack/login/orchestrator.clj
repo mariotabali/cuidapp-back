@@ -10,6 +10,8 @@
       (let [{:keys [email password]} email-password
             user-authenticated (check-user-credentials email password)]
         (if user-authenticated
-          (success-response 200 {:JWT_TOKEN (generate-jwt-token email)})
+          (success-response 200 {
+                                 :JWT_TOKEN (generate-jwt-token email)
+                                 :id (:id user_authenticated)})
           (unauthorized-response)))
       {:status 400 :errors validation-errors})))
