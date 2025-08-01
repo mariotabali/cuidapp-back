@@ -11,6 +11,7 @@
             [dango-stack.pp-under-care.create.orchestrator :refer [create-pp-under-care-orchestrator]]
             [dango-stack.register.orchestrator :refer [register-orchestrator]]
             [dango-stack.activate-account.orchestrator :refer [activate-account-orchestrator]]
+            [dango-stack.medications.create.orchestrator :refer [create-medication-orchestrator]]
             ))
 
 (defroutes app-routes
@@ -22,19 +23,24 @@
                {:sample_output {:status 200
                                 :JWT_TOKEN "asdasdasdasd"}}
                {:behaviour "Receives email and password, validates that email is valid, selects email from user table and compares hashes if true return 200 and the JWT_TOKEN"})
-      (json-response(login-orchestrator email-password)))
+      (json-response (login-orchestrator email-password)))
     )
   (POST "/api/register" req
     (let [user-details (:body req)]
       (json-response (register-orchestrator user-details)))) 
   (GET "/api/activate" req
-     (let [params (:params req)]
-       (json-response (activate-account-orchestrator params))))
+    (let [params (:params req)] 
+      (json-response (activate-account-orchestrator params))))
+  ;; private routes
   (GET "/api/pp-under-care" req
-     (json-response (pp-under-care-orchestrator req)))
+    (json-response (pp-under-care-orchestrator req)))
   (POST "/api/pp-under-care" req 
-     (let [body (:body req)] 
-       (json-response (create-pp-under-care-orchestrator body))))
+    (let [body (:body req)] 
+      (json-response (create-pp-under-care-orchestrator body))))
+  (POST "/api/medications" req
+  (let [medication-data (:body req)]
+    (json-response (create-medication-orchestrator medication-data))))
+  
   (route/not-found
    (json-response {:error "404 not found"})))
 
