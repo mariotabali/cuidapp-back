@@ -46,3 +46,33 @@ CREATE TABLE IF NOT EXISTS user_activations (
   expires_at TIMESTAMP NOT NULL,
   activated_at TIMESTAMP
 );
+
+CREATE TABLE diagnosis (
+  id SERIAL PRIMARY KEY,
+  cared_person_id INTEGER NOT NULL,
+  diagnosis_date DATE NOT NULL,
+  diagnosis TEXT NOT NULL,
+  evolution TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_cared_person
+    FOREIGN KEY (cared_person_id)
+    REFERENCES cared_people(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE medications (
+  id SERIAL PRIMARY KEY,
+  cared_person_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  dosage TEXT,             -- e.g., '10 mg', '850 mg'
+  frequency TEXT,          -- e.g., '1 vez al día'
+  instructions TEXT,       -- Optional: e.g., 'antes del desayuno'
+  is_current BOOLEAN DEFAULT TRUE, -- true = actuales, false = pasados
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_cared_person
+    FOREIGN KEY (cared_person_id)
+    REFERENCES cared_people(id)
+    ON DELETE CASCADE
+);
