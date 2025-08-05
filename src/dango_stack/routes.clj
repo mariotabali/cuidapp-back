@@ -12,6 +12,8 @@
             [dango-stack.register.orchestrator :refer [register-orchestrator]]
             [dango-stack.activate-account.orchestrator :refer [activate-account-orchestrator]]
             [dango-stack.medications.create.orchestrator :refer [create-medication-orchestrator]]
+            [dango-stack.diagnosis.create.orchestrator :refer [diagnosis-orchestrator]]
+
             ))
 
 (defroutes app-routes
@@ -40,6 +42,9 @@
   (POST "/api/medications" req
   (let [medication-data (:body req)]
     (json-response (create-medication-orchestrator medication-data))))
+  (POST "/api/diagnosis" req
+    (json-response (diagnosis-orchestrator (:body req))))
+
   
   (route/not-found
    (json-response {:error "404 not found"})))
