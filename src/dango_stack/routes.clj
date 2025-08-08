@@ -17,6 +17,7 @@
             ))
 
 (defroutes app-routes
+  ;;public routes
   (POST "/api/login" req
     (let [email-password (:body req)]
       (comment {:input "login information valid email and a non empty password"}
@@ -44,7 +45,6 @@
     (json-response (create-medication-orchestrator medication-data))))
   (POST "/api/diagnosis" req
     (json-response (diagnosis-orchestrator (:body req))))
-
   
   (route/not-found
    (json-response {:error "404 not found"})))

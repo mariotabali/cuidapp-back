@@ -3,4 +3,3 @@
 
 (defn diagnosis-orchestrator [diagnosis-data]
   (save-diagnosis diagnosis-data))
-
