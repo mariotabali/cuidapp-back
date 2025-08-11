@@ -26,6 +26,7 @@ CREATE TABLE cared_people (
 
 CREATE VIEW v_cared_people AS
 SELECT
+  cp.id,
   cp.name,
   DATE_PART('year', AGE(cp.date_of_birth)) AS age,
   u.email AS carer_email

@@ -1,20 +1,20 @@
 (ns dango-stack.routes
   (:require [compojure.core :refer [GET POST defroutes]]
             [compojure.route :as route]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]] 
+            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.params :refer [wrap-params]]
-            
+
             [dango-stack.middleware.auth :refer [wrap-authentication]]
-            [dango-stack.util :refer [json-response]] 
-            [dango-stack.login.orchestrator :refer [login-orchestrator]] 
+            [dango-stack.util :refer [json-response]]
+            [dango-stack.login.orchestrator :refer [login-orchestrator]]
             [dango-stack.pp-under-care.orchestrator :refer [pp-under-care-orchestrator]]
             [dango-stack.pp-under-care.create.orchestrator :refer [create-pp-under-care-orchestrator]]
             [dango-stack.register.orchestrator :refer [register-orchestrator]]
             [dango-stack.activate-account.orchestrator :refer [activate-account-orchestrator]]
-            [dango-stack.medications.create.orchestrator :refer [create-medication-orchestrator]]
-            [dango-stack.diagnosis.create.orchestrator :refer [diagnosis-orchestrator]]
+            [dango-stack.medications.create.orchestrator :refer [create-medication-orchestrator]] 
+            [dango-stack.medications.get.orchestrator :refer [get-medications-orchestrator]]
+            [dango-stack.diagnosis.create.orchestrator :refer [diagnosis-orchestrator]]))
 
-            ))
 
 (defroutes app-routes
   ;;public routes
@@ -43,6 +43,8 @@
   (POST "/api/medications" req
   (let [medication-data (:body req)]
     (json-response (create-medication-orchestrator medication-data))))
+  (GET "/api/medications/:cared_person_id" [cared_person_id] 
+    (json-response (get-medications-orchestrator cared_person_id)))
   (POST "/api/diagnosis" req
     (json-response (diagnosis-orchestrator (:body req))))
   
