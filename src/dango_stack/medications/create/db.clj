@@ -12,5 +12,4 @@
                 (get medication :instructions)
                 (get medication :is_current true)]]
     (jdbc/with-db-transaction [t-con db-config]
-      (jdbc/db-set-rollback-only! t-con)
-      (jdbc/query t-con [insert-query params]))))
+      (jdbc/query t-con (into [insert-query] params)))))
